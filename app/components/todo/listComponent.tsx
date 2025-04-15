@@ -14,14 +14,7 @@ function TodoListComponent (){
 
     const query = useQuery({
         queryKey: ['todos'],
-        queryFn: async() => {
-
-            await new Promise(resolve => setTimeout(resolve, 2000));
-
-            const todos:Todo[] = await testTodoList()
-
-            return todos
-        }
+        queryFn: () => testTodoList(pageStr, sizeStr)
     })
 
     const {isFetching, data, error} = query
