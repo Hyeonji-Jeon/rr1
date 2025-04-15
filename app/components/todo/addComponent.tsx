@@ -1,8 +1,17 @@
 import React, {type FormEvent, useRef} from "react";
+import {testTodoAdd} from "~/api/todoAPI";
+import {useMutation} from "@tanstack/react-query";
 
 function TodoAddComponent() {
 
     const formRef = useRef<HTMLFormElement | null>(null);
+
+    const addMutation = useMutation({
+        mutationFn: testTodoAdd,
+        onSuccess: (data) => {
+            alert("success");
+        }
+    })
 
     const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -13,11 +22,10 @@ function TodoAddComponent() {
         }else {
             const titleInput = form.elements.namedItem("title") as HTMLInputElement | null;
             const writerInput = form.elements.namedItem("writer") as HTMLInputElement | null;
-
             const title = titleInput?.value ?? "";
             const writer = writerInput?.value ?? "";
 
-            console.log("입력값:", { title, writer });
+            testTodoAdd({title, writer})
         }
 
 

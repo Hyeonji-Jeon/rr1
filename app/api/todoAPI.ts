@@ -13,6 +13,10 @@ export async function testTodoList(page:string, size:string) {
 
 export async function testTodoAdd(todo:TodoAdd) {
 
-    const res = await axios.post(host, )
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
+    console.log(todo);
+
+    return {result:'success', data: 123}
 
 }
