@@ -21,6 +21,16 @@ export async function testTodoAdd(todo:TodoAdd):Promise<ActionResult<number>> {
 
 }
 
+export async function testTodoAddForm(formData:FormData):Promise<ActionResult<number>> {
+
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
+    console.log(formData);
+
+    return {result:'success', data: 123}
+
+}
+
 
 
 

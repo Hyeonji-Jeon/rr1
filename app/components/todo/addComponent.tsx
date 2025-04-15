@@ -1,5 +1,5 @@
 import React, {type FormEvent, useRef} from "react";
-import {testTodoAdd} from "~/api/todoAPI";
+import {testTodoAdd, testTodoAddForm} from "~/api/todoAPI";
 import {useMutation} from "@tanstack/react-query";
 
 function TodoAddComponent() {
@@ -7,14 +7,16 @@ function TodoAddComponent() {
     const formRef = useRef<HTMLFormElement | null>(null);
 
     const addMutation = useMutation({
-        mutationFn: testTodoAdd,
+        mutationFn: testTodoAddForm,
         onSuccess: (data) => {
-            alert("success");
+            alert("SUCCESS")
         }
     })
 
     const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
+
         e.preventDefault();
+
         const form = formRef.current;
 
         if(!form) {
@@ -22,19 +24,26 @@ function TodoAddComponent() {
         }else {
 
             const formData = new FormData(form);
-            const title = formData.get("title") as string;
-            const writer = formData.get("writer") as string;
+            addMutation.mutate(formData);
 
-            console.log("FormData 수집:", { title, writer });
+            //2버전
+            // const formData = new FormData(form);
+            // const title = formData.get("title") as string;
+            // const writer = formData.get("writer") as string;
+            //
+            // console.log("FormData 수집:", { title, writer });
 
+
+            //1버전
             // const titleInput = form.elements.namedItem("title") as HTMLInputElement | null;
             // const writerInput = form.elements.namedItem("writer") as HTMLInputElement | null;
             // const title = titleInput?.value ?? "";
             // const writer = writerInput?.value ?? "";
             //
             // addMutation.mutate({title,writer})
+            //old
+            //testTodoAdd({title,writer})
 
-            //testTodoAdd({title, writer})
         }
 
 
@@ -56,6 +65,7 @@ function TodoAddComponent() {
                         type="text"
                         className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-500"
                         placeholder="제목을 입력하세요"
+                        required={true}
                     />
                 </div>
 
@@ -69,6 +79,7 @@ function TodoAddComponent() {
                         type="text"
                         className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-500"
                         placeholder="작성자 이름"
+                        required={true}
                     />
                 </div>
 
@@ -79,6 +90,8 @@ function TodoAddComponent() {
                     제출하기
                 </button>
             </form>
+
+            {addMutation.isPending && <div className={'text-6xl bg-amber-500'}>처리중</div>}
         </div>
     );
 }
