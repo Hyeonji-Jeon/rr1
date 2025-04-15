@@ -18,12 +18,14 @@ function TodoAddComponent() {
         const form = formRef.current;
 
         if(!form) {
-
+            return;
         }else {
             const titleInput = form.elements.namedItem("title") as HTMLInputElement | null;
             const writerInput = form.elements.namedItem("writer") as HTMLInputElement | null;
             const title = titleInput?.value ?? "";
             const writer = writerInput?.value ?? "";
+
+            addMutation.mutate({title,writer})
 
             //testTodoAdd({title, writer})
         }
