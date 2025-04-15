@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const rest_api_key:string = 'c3880d453ea7e39527f206503a1ba078'
 const redirect_uri = 'http://localhost:5173/member/kakao'
 
@@ -11,3 +13,26 @@ export const getKakaoLoginLink = () => {
 
     return kakaoURL
 }
+
+//access token 얻기
+export const getAccessToken = async (authCode:string) => {
+
+    const header = {
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        }
+    }
+    const params = {
+        grant_type: "authorization_code",
+        client_id: rest_api_key,
+        redirect_uri: redirect_uri,
+        code:authCode
+    }
+
+    const res = await axios.post(access_token_url, params , header)
+
+    const accessToken = res.data.access_token
+
+    return accessToken
+}
+
