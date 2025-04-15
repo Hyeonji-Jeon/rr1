@@ -11,4 +11,8 @@ export async function testTodoList(page:string, size:string) {
 
 }
 
-export async function testTodoAdd()
+export async function testTodoAdd(todo:TodoAdd) {
+
+    const res = await axios.post(host, )
+
+}
