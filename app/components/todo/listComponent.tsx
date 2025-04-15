@@ -14,7 +14,8 @@ function TodoListComponent (){
 
     const query = useQuery({
         queryKey: ['todos'],
-        queryFn: () => testTodoList(pageStr, sizeStr)
+        queryFn: () => testTodoList(pageStr, sizeStr),
+        staleTime: 10 * 60 * 1000,
     })
 
     const {isFetching, data, error} = query
