@@ -1,8 +1,16 @@
 import {useQuery} from "@tanstack/react-query";
 import {testTodoList} from "~/api/todoAPI";
+import {useSearchParams} from "react-router";
 
 
 function TodoListComponent (){
+
+    const [searchParams] = useSearchParams();
+
+    const pageStr = searchParams.get("page") || "1"
+    const sizeStr = searchParams.get("size") || "10"
+
+    console.log("pageStr: ", pageStr," sizeStr: ", sizeStr)
 
     const query = useQuery({
         queryKey: ['todos'],
