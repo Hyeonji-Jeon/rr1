@@ -12,8 +12,8 @@ function KakaoRedirect() {
 
         if(authCode){
             getAccessToken(authCode).then(data => {
-                const accessToken = data.access_token;
-                console.log(accessToken);
+                const accessToken = data
+                console.log("accessToken", accessToken);
             });
         }
     }, [authCode])
