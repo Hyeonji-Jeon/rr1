@@ -25,7 +25,7 @@ function TodoAddComponent() {
             const title = titleInput?.value ?? "";
             const writer = writerInput?.value ?? "";
 
-            testTodoAdd({title, writer})
+            //testTodoAdd({title, writer})
         }
 
 
