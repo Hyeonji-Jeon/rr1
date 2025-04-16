@@ -1,5 +1,6 @@
 import React, {type ChangeEvent, type FormEvent, useState} from "react";
 import {getToken} from "~/api/memberAPI";
+import {setCookie} from "~/util/cookieUtil";
 
 const LoginComponent = () => {
     const [mid, setMid] = useState("");
@@ -10,7 +11,13 @@ const LoginComponent = () => {
         // 여기에 로그인 로직 추가
         console.log("ID:", mid, "PW:", mpw);
 
-        getToken(mid, mpw)
+        getToken(mid, mpw).then((res) => {
+            const accessToken = res[0]
+            const refreshToken = res[1]
+
+            setCookie('access_token', accessToken,1)
+            setCookie('refresh_token', refreshToken,7)
+        })
     };
 
     return (
