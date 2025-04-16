@@ -1,10 +1,15 @@
 import axios, {AxiosError, type AxiosRequestConfig, type AxiosResponse, type InternalAxiosRequestConfig} from "axios";
+import {getCookie} from "~/util/cookieUtil";
 
 const jwtAxios = axios.create()
 
 //before request
 const beforeReq = (config: InternalAxiosRequestConfig) => {
     console.log("before request.............")
+
+    const accessToken = getCookie("access_token");
+
+    config.headers.Authorization = `Bearer ${accessToken}`;
 
     return config
 }
