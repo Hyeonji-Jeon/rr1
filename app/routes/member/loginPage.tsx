@@ -1,6 +1,8 @@
 import React from 'react';
 import { getKakaoLoginLink } from "~/api/kakaoAPI";
 import { Link } from "react-router";
+import LoadingComponent from "~/components/common/loadingComponent";
+import LoginComponent from "~/components/member/loginComponent";
 
 function LoginPage() {
     const kakaoLink = getKakaoLoginLink();
@@ -10,6 +12,8 @@ function LoginPage() {
             <div className="bg-white rounded-2xl shadow-xl p-10 w-full max-w-md text-center">
                 <h1 className="text-3xl font-bold mb-6 text-yellow-600">Welcome Back!</h1>
                 <p className="text-gray-500 mb-8">카카오로 로그인 해보세용 ✨</p>
+
+                <LoginComponent></LoginComponent>
 
                 <Link
                     to={kakaoLink}
