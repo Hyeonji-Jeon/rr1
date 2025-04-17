@@ -23,6 +23,9 @@ function TodoListComponent () {
     const {isFetching, data, error } = query
 
     if(error){
+
+        console.log(error)
+
         return(
             <Navigate to="/member/login" replace />
         )
